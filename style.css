@@ -26,3 +26,16 @@ nav ul li a {
     color: white;
     text-decoration: none;
 }
+button{
+    font-size:1.2rem;
+    font-weight: bold;
+    background: none;
+    border: none;
+    color: inherit;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: none;
+}
+button:hover{
+    text-decoration: underline;
+}
