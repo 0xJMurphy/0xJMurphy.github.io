@@ -281,11 +281,12 @@ body {
   transform: translateY(0);
   transition: opacity 600ms cubic-bezier(.2,.65,.3,1), transform 600ms cubic-bezier(.2,.65,.3,1);
 }
-/* Pages-safe: content shows even if JS fails */
-.fade-in-up { opacity: 1; transform: none; }
-.js .fade-in-up { opacity: 0; transform: translateY(14px); will-change: transform, opacity; }
-.js .fade-in-up.appear { 
-  opacity: 1; 
-  transform: translateY(0); 
-  transition: opacity 600ms cubic-bezier(.2,.65,.3,1), transform 600ms cubic-bezier(.2,.65,.3,1);
+.resume-cta {
+  margin-top: 28px;
+}
+
+/* --- Better readability for theme icon in dark mode --- */
+:root.dark .toggle .icon {
+  color: #fff;
+  filter: drop-shadow(0 0 4px rgba(255,255,255,0.25));
 }
