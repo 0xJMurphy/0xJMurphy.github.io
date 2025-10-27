@@ -1,0 +1,283 @@
+/* ---------- Base & Theme ---------- */
+:root {
+  --bg: #ffffff;
+  --bg-soft: #f7f7f9;
+  --text: #0f172a;
+  --muted: #475569;
+  --card: #ffffff;
+  --border: rgba(0,0,0,0.08);
+  --shadow: 0 4px 16px rgba(0,0,0,0.06);
+  --primary: #111827;
+  --primary-contrast: #ffffff;
+  --nav: color-mix(in oklab, #ffffff 75%, transparent);
+}
+
+:root.dark {
+  --bg: #0a0a0b;
+  --bg-soft: #0f1115;
+  --text: #f8fafc;
+  --muted: #cbd5e1;
+  --card: #0f1115;
+  --border: rgba(255,255,255,0.12);
+  --shadow: 0 6px 20px rgba(0,0,0,0.35);
+  --primary: #ffffff;
+  --primary-contrast: #0a0a0b;
+  --nav: color-mix(in oklab, #0f1115 75%, transparent);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body {
+  margin: 0;
+  font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+  color: var(--text);
+  background: linear-gradient(180deg, var(--bg) 0%, var(--bg-soft) 100%);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ---------- Sticky Top Navigation ---------- */
+.topnav {
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  backdrop-filter: saturate(140%) blur(8px);
+  background: var(--nav);
+  border-bottom: 1px solid var(--border);
+}
+.nav-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand {
+  font-weight: 800;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  color: var(--text);
+  border: 1px solid var(--border);
+  padding: 6px 10px;
+  border-radius: 12px;
+  background: var(--card);
+}
+.nav-links {
+  display: flex;
+  gap: 10px;
+}
+.nav-link {
+  text-decoration: none;
+  color: var(--text);
+  font-weight: 600;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 1px solid transparent;
+}
+.nav-link:hover {
+  border-color: var(--border);
+  background: color-mix(in oklab, var(--card) 92%, transparent);
+}
+.nav-link.active {
+  border-color: var(--primary);
+}
+
+/* ---------- Theme Toggle ---------- */
+.toggle {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 1000;
+  padding: 10px 12px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: color-mix(in oklab, var(--card) 92%, transparent);
+  box-shadow: var(--shadow);
+  cursor: pointer;
+}
+.toggle .icon { font-size: 16px; }
+
+/* ---------- Hero ---------- */
+.hero {
+  max-width: 1040px;
+  margin: 0px auto 0; /* more top space to clear nav */
+  padding: 0 16px;
+  text-align: center;
+  min-height: 92vh; /* isolate the section more */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.pill {
+  
+  display: inline-block;
+  padding: 6px 10px;
+  font-size: 12px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--card);
+}
+.hero h1 {
+  margin: 10px 0 0;
+  font-size: clamp(36px, 6vw, 60px);
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+}
+.tagline {
+  max-width: 720px;
+  margin: 12px auto 0;
+  font-size: clamp(14px, 2vw, 18px);
+  color: var(--muted);
+}
+.cta-row {
+  margin-top: 24px;
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-block;
+  padding: 10px 16px;
+  font-weight: 700;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  transition: transform 0.15s ease, background 0.2s ease, opacity 0.2s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btn-primary {
+  color: var(--primary-contrast);
+  background: var(--primary);
+  border-color: var(--primary);
+}
+.btn-outline {
+  color: var(--text);
+  background: transparent;
+}
+.links {
+  margin-top: 16px;
+  display: flex;
+  gap: 18px;
+  justify-content: center;
+  flex-wrap: wrap;
+  font-size: 14px;
+}
+.links a { color: var(--muted); text-decoration: none; }
+.links a:hover { text-decoration: underline; }
+
+/* ---------- Sections ---------- */
+.section {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 120px 16px; /* increased spacing around sections */
+  min-height: 90vh;   /* ensure each section mostly fills screen */
+  scroll-margin-top: 84px; /* anchor offset for sticky nav */
+}
+.section-head h2 {
+  margin: 0;
+  font-size: clamp(22px, 4vw, 30px);
+}
+.section-sub {
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ---------- About Layout ---------- */
+.about-card {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 18px;
+  margin-top: 20px;
+}
+@media (min-width: 820px) {
+  .about-card { grid-template-columns: 320px 1fr; }
+}
+.about-media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.avatar-wrap {
+  position: relative;
+  width: 240px;
+  height: 240px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  background: var(--card);
+  box-shadow: var(--shadow);
+}
+.avatar-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.avatar-placeholder {
+  display: none;
+}
+.avatar-wrap .avatar-fallback {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--text);
+  background: repeating-linear-gradient(45deg, color-mix(in oklab, var(--card) 85%, transparent), color-mix(in oklab, var(--card) 85%, transparent) 10px, color-mix(in oklab, var(--bg-soft) 85%, transparent) 10px, color-mix(in oklab, var(--bg-soft) 85%, transparent) 20px);
+}
+.about-body h3 { margin: 0 0 8px; font-size: 18px; }
+.about-body p { margin: 6px 0 0; color: var(--muted); }
+.about-body ul { margin: 12px 0 0 18px; color: var(--muted); }
+
+/* ---------- Cards & Grid ---------- */
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 20px;
+  box-shadow: var(--shadow);
+  transition: box-shadow 0.2s ease, transform 0.15s ease;
+}
+.card:hover { transform: translateY(-2px); }
+.card h3 { margin: 0 0 8px; font-size: 18px; }
+.card p { margin: 6px 0 0; color: var(--muted); }
+.card ul { margin: 12px 0 0 18px; color: var(--muted); }
+
+.link-card { text-decoration: none; color: inherit; display: block; }
+.arrow { display: inline-block; margin-top: 10px; font-weight: 600; }
+.arrow.muted { opacity: 0.6; }
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 16px;
+  margin-top: 16px;
+}
+@media (min-width: 768px) {
+  .grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* ---------- Footer ---------- */
+.footer {
+  max-width: 1040px;
+  margin: 0 auto;
+  padding: 100px 16px 40px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 14px;
+}
+
+/* ---------- Scroll Animations ---------- */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(14px);
+  will-change: transform, opacity;
+}
+.fade-in-up.appear {
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 600ms cubic-bezier(.2,.65,.3,1), transform 600ms cubic-bezier(.2,.65,.3,1);
+}
