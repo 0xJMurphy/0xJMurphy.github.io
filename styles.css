@@ -335,9 +335,6 @@ body {
   animation: rainbow-shift 6s linear infinite;
 }
 
-/* Optional: speed up on hover 
-#projects .card:hover::before { animation-duration: 3s; }*/
-
 /* Respect reduced motion */
 @media (prefers-reduced-motion: reduce) {
   #projects .card::before { animation: none; }
@@ -351,6 +348,64 @@ body {
 }
 
 @keyframes rainbow-shift {
+  to { --angle: 360deg; }
+}
+/* === Warm animated ring around profile picture (thin) === */
+.avatar-wrap {
+  position: relative; /* already in your CSS; safe to repeat */
+  isolation: isolate; /* ensure pseudo-element layers correctly */
+}
+
+/* The animated ring */
+.avatar-wrap::after {
+  content: "";
+  position: absolute;
+  inset: 0;                 /* same size as the avatar */
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 2;
+
+  /* Thin ring thickness  */
+  padding: 2px;
+
+  /* Animate only the gradient, not the geometry */
+  --angle: 0deg;
+  background: conic-gradient(
+    from var(--angle),
+    #ff2a2a,
+    #ff7a00,
+    #ffd400,
+    #ff7a00,
+    #ff2a2a
+  );
+
+  /* Show only the ring, not the fill */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+          mask-composite: exclude;
+
+  /* Smooth flowing colors  */
+  animation: warm-ring-shift 8s linear infinite;
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .avatar-wrap::after { animation: none; }
+}
+
+/* Custom property for the conic-gradient angle */
+@property --angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes warm-ring-shift {
   to { --angle: 360deg; }
 }
 
