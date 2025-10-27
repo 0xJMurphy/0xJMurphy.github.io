@@ -290,3 +290,67 @@ body {
   color: #fff;
   filter: drop-shadow(0 0 4px rgba(255,255,255,0.25));
 }
+}
+/* --- Animated rainbow border for project cards (colors flow, frame stays still) --- */
+#projects .card {
+  position: relative;
+  z-index: 0;
+}
+
+#projects .card::before {
+  content: "";
+  position: absolute;
+  inset: 0;                 /* full size */
+  padding: 2px;             /* border thickness */
+  border-radius: 22px;      /* match your card radius (card is 20px) */
+  pointer-events: none;
+  z-index: -1;
+
+  /* Animate only the gradient, not the element */
+  --angle: 0deg;
+  background: conic-gradient(
+    from var(--angle),
+    #ff004c,
+    #ff7a00,
+    #ffd400,
+    #4dff00,
+    #00ffd5,
+    #00a2ff,
+    #6a00ff,
+    #ff00e6,
+    #ff004c
+  );
+
+  /* Show as a ring (border) using masks */
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+          mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+          mask-composite: exclude;
+
+  /* This animates the gradient internally (no rotation of the box) */
+  animation: rainbow-shift 6s linear infinite;
+}
+
+/* Optional: speed up on hover 
+#projects .card:hover::before { animation-duration: 3s; }*/
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  #projects .card::before { animation: none; }
+}
+
+/* Enable smooth interpolation of the custom angle */
+@property --angle {
+  syntax: '<angle>';
+  inherits: false;
+  initial-value: 0deg;
+}
+
+@keyframes rainbow-shift {
+  to { --angle: 360deg; }
+}
+
